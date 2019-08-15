@@ -10,25 +10,25 @@
 
 <body>
 
-  <div class="wrapper">
+  <div class="wrapper" id="calc">
       <div class="output">0</div>
-      <div class="keypad function" id="add">+</div>
-      <div class="keypad function" id="sub">-</div>
-      <div class="keypad function" id="mul">&times;</div>
-      <div class="keypad function" id="divide">&divide;</div>
-      <div class="keypad number">7</div>
-      <div class="keypad number">8</div>
-      <div class="keypad number">9</div>
-      <div class="keypad function equals" id="equals">=</div>
-      <div class="keypad number">4</div>
-      <div class="keypad number">5</div>
-      <div class="keypad number">6</div>
-      <div class="keypad number">1</div>
-      <div class="keypad number">2</div>
-      <div class="keypad number">3</div>
-      <div class="keypad clear" id="clear">C</div>
-      <div class="keypad number zero">0</div> 
-      <div class="keypad number">.</div>
+      <div class="keypad operation" data-operation="add">+</div>
+      <div class="keypad operation" data-operation="subtract">-</div>
+      <div class="keypad operation" data-operation="multiply">&times;</div>
+      <div class="keypad operation" data-operation="divide">&divide;</div>
+      <div class="keypad numeral" data-numeral="7">7</div>
+      <div class="keypad numeral" data-numeral="8">8</div>
+      <div class="keypad numeral" data-numeral="9">9</div>
+      <div class="keypad operation equals" data-operation="equals">=</div>
+      <div class="keypad numeral" data-numeral="4">4</div>
+      <div class="keypad numeral" data-numeral="5">5</div>
+      <div class="keypad numeral" data-numeral="6">6</div>
+      <div class="keypad numeral" data-numeral="1">1</div>
+      <div class="keypad numeral" data-numeral="2">2</div>
+      <div class="keypad numeral" data-numeral="3">3</div>
+      <div class="keypad clear" data-operation="clear">C</div>
+      <div class="keypad numeral zero" data-numeral="0">0</div> 
+      <div class="keypad numeral" data-operation="decicmal">.</div>
   </div>
 
   <script src="js/scripts.js"></script>
