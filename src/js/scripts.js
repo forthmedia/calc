@@ -1,5 +1,4 @@
 // scripts.js
-
 const output = document.getElementById('output');
 
 //delegate click listener to outer div
