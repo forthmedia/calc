@@ -56,7 +56,7 @@ body {
 .selected {
     background-color: darkslategray;
 }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 500px) {
     #calculator {
         margin-top: 0;
     }
