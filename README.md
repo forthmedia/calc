@@ -8,3 +8,6 @@ gulp build
 
 ## Test Command
 npm test
+
+## Live Demo
+http://www.forth-media.com/git/calc/
