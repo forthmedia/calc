@@ -1,6 +1,13 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
+#container {
+    text-align: center;
+}
+#calculator {
+    display: inline-block;
+    margin-top: 20px;
+}
 .wrapper {
     width: 380px;
     height: 380px;
@@ -49,4 +56,20 @@ body {
 .selected {
     background-color: darkslategray;
 }
-  
+@media only screen and (max-width: 420px) {
+    #calculator {
+        margin-top: 0;
+    }
+    .wrapper {
+        width: 250px;
+        height: 340px;
+        grid-template-columns: 50px 50px 50px 50px;
+    }
+    .output {
+        font-size: 150%;
+        padding: 5px;
+    }
+    .keypad {
+        font-size: 100%;
+    }
+}

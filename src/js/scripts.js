@@ -2,7 +2,7 @@
 const output = document.getElementById('output');
 
 //delegate click listener to outer div
-document.getElementById('calc').addEventListener('click', e => {
+document.getElementById('grid').addEventListener('click', e => {
     deselectAll();
     if (e.target.dataset.operation) {
         const current = output.textContent;
