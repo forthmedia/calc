@@ -3,8 +3,10 @@ Calculator
 
 A JavaScript calculater with Responsive design, Gulp build distribution, and Mocha/Chai tests.
 
-## Build Command
-gulp build
+Version 1.1: Update build to Webpack. Adds webpack.config.js. Note that for this version CSS is injected into the HEAD by Webpack.
+
+## Run Command
+npm run dev
 
 ## Test Command
 npm test
