@@ -2,7 +2,7 @@
   "name": "calc",
   "version": "1.1.0",
   "description": "Calculator",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "dev": "webpack-dev-server --open",
     "build": "webpack -p",
