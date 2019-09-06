@@ -1,5 +1,7 @@
 require('./styles.css');
 
+localStorage.clear();
+
 document.addEventListener("DOMContentLoaded", function() {
     
     const output = document.getElementById('output');
@@ -8,42 +10,27 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('grid').addEventListener('click', e => {
         deselectAll();
         if (e.target.dataset.operation) {
-            const current = output.textContent;
             switch(e.target.dataset.operation){
                 case 'decimal':
                     displayDecimal();
                     break;
                 case 'equals':
-                    localStorage.setItem('value2', current);
-                    calculate();
+                    doEquals()
                     break;
                 case 'clear':
-                    localStorage.setItem('keystroke', 'clear');
-                    output.textContent = '0';
+                    doClear()
                     break;
                 case 'add':
-                    e.target.classList.add('selected');
-                    localStorage.setItem('keystroke', 'operation');
-                    localStorage.setItem('operator', e.target.dataset.operation);
-                    localStorage.setItem('value1', current);
+                    doOperation(e);
                     break;
                 case 'subtract':
-                    e.target.classList.add('selected');
-                    localStorage.setItem('keystroke', 'operation');
-                    localStorage.setItem('operator', e.target.dataset.operation);
-                    localStorage.setItem('value1', current);
+                    doOperation(e);
                     break;
                 case 'multiply':
-                    e.target.classList.add('selected');
-                    localStorage.setItem('keystroke', 'operation');
-                    localStorage.setItem('operator', e.target.dataset.operation);
-                    localStorage.setItem('value1', current);
+                    doOperation(e);
                     break;
                 case 'divide':
-                    localStorage.setItem('keystroke', 'operation');
-                    e.target.classList.add('selected');
-                    localStorage.setItem('operator', e.target.dataset.operation);
-                    localStorage.setItem('value1', current);
+                    doOperation(e);
             }
         } else if (e.target.dataset.numeral) {
             updateDisplay(e.target.dataset.numeral);
@@ -53,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let updateDisplay = num => {
         const current = output.textContent;
         const keystroke = localStorage.getItem('keystroke');
-        if (current === '0' || keystroke == 'operation') {
+        if (current === '0' || keystroke === 'operation' || keystroke === 'equals') {
             output.textContent = num;
         } else {
             output.textContent = current + num;
@@ -62,10 +49,14 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     let displayDecimal = () => {
-        if (! output.textContent.includes('.')) {
+        const keystroke = localStorage.getItem('keystroke');
+        if (keystroke === 'operation' || keystroke === 'equals') {
+            output.textContent = '0.'
+        } else if (! output.textContent.includes('.')) {
             output.textContent += '.';
         }
-        localStorage.setItem('keystroke', 'other');
+
+        localStorage.setItem('keystroke', 'decimal');
     }
 
     let deselectAll = () => {
@@ -93,6 +84,52 @@ document.addEventListener("DOMContentLoaded", function() {
             case 'divide':
                 result = parseFloat(value1) / parseFloat(value2);
             }
-        output.textContent = result;
+
+        return result;
+    }
+
+    let doOperation = (e) => {
+        const current = output.textContent;
+        const operator = localStorage.getItem('operator');
+        const value1 = localStorage.getItem('value1');
+        const previous = localStorage.getItem('keystroke');
+
+        e.target.classList.add('selected');
+        localStorage.setItem('keystroke', 'operation');
+        localStorage.setItem('operator', e.target.dataset.operation);
+
+        if (operator && value1 && previous !== 'operation' && previous !== 'equals') {
+            localStorage.setItem('value2', current);
+            const result = calculate();
+            output.textContent = result;
+            localStorage.setItem('value1', result);            
+        } else {
+            localStorage.setItem('value1', current);
+        }
+    }
+
+    let doEquals = () => {
+        const value1 = localStorage.getItem('value1');
+        const current = output.textContent;
+        localStorage.setItem('value2', current);
+        if (value1) {
+            if (localStorage.getItem('keystroke') === 'equals') {
+                localStorage.setItem('value1', current);
+                const repeat = localStorage.getItem('repeat');
+                localStorage.setItem('value2', repeat);
+            }
+            const result = calculate();
+            output.textContent = result;
+            if (! (localStorage.getItem('keystroke') === 'equals')) {
+                localStorage.setItem('repeat', current);
+            }
+        }
+        localStorage.setItem('keystroke', 'equals');
+    }
+
+    let doClear = () => {
+        localStorage.clear();
+        localStorage.setItem('keystroke', 'clear');
+        output.textContent = '0';
     }
 })
