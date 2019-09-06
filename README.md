@@ -3,10 +3,13 @@ Calculator
 
 A JavaScript calculater with Responsive design, Webpack, and Mocha/Chai tests.
 
-Version 1.1: Update build to Webpack. Adds webpack.config.js. Note that for this version CSS is injected into the HEAD by Webpack.
+Version 1.1: Fix Calculator bugs. Update to Webpack. Webpack minifies JavaScript and CSS to Bundle.
 
-## Run Command
+## Run Development Server
 npm run dev
+
+## Clean and Build Distribution
+npm run build
 
 ## Test Command
 npm test

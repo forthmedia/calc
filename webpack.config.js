@@ -1,9 +1,12 @@
-var path = require('path');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
     output: {
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      path: __dirname + '/dist'
     },
     module: {
       rules:[
@@ -13,6 +16,10 @@ module.exports = {
         },
       ]
     },
+    plugins: [
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin()
+    ],
     devServer: {
       contentBase: path.join(__dirname, 'src')
     }  
