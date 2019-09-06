@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     //delegate click listener to outer div
     document.getElementById('grid').addEventListener('click', e => {
         deselectAll();
+        setClearButton(e);
         if (e.target.dataset.operation) {
             switch(e.target.dataset.operation){
                 case 'decimal':
@@ -128,8 +129,19 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     let doClear = () => {
-        localStorage.clear();
         localStorage.setItem('keystroke', 'clear');
         output.textContent = '0';
+        clearButton = document.getElementById('clear');
+        if (clearButton.textContent == 'AC') {
+            localStorage.clear();
+        } else {
+            clearButton.textContent = 'AC';
+        }
+   }
+
+    let setClearButton = (e) => {
+        if (!(e.target.id === 'clear')) {
+            document.getElementById('clear').innerHTML = 'CE';
+        }
     }
 })
