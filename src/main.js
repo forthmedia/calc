@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", function() {
     //delegate click listener to outer div
     document.getElementById('grid').addEventListener('click', e => {
         deselectAll();
-        setClearButton(e);
+        if (!(e.target.id === 'clear')) {
+            setClearButton();
+        }
         if (e.target.dataset.operation) {
             switch(e.target.dataset.operation){
                 case 'decimal':
@@ -22,19 +24,63 @@ document.addEventListener("DOMContentLoaded", function() {
                     doClear()
                     break;
                 case 'add':
-                    doOperation(e);
+                    e.target.classList.add('selected');
+                    doOperation('add');
                     break;
                 case 'subtract':
-                    doOperation(e);
+                    e.target.classList.add('selected');
+                    doOperation('subtract');
                     break;
                 case 'multiply':
-                    doOperation(e);
+                    e.target.classList.add('selected');
+                    doOperation('multiply');
                     break;
                 case 'divide':
-                    doOperation(e);
+                    e.target.classList.add('selected');
+                    doOperation('divide');
             }
         } else if (e.target.dataset.numeral) {
             updateDisplay(e.target.dataset.numeral);
+        }
+    });
+
+    document.addEventListener('keyup', (e) => {
+        setClearButton();
+        const key = e.key;
+        switch(key) {
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                updateDisplay(key);
+                break;
+            case '.':
+                displayDecimal();
+                break;
+            case '=':
+                doEquals();
+                break;
+            case 'c':
+            case 'C':
+                doClear()
+                break;
+            case '+':
+                doOperation('add');
+                break;
+            case '-':
+                doOperation('subtract');
+                break;
+            case '*':
+                doOperation('multiply');
+                break;
+            case '/':
+                doOperation('divide');
         }
     });
 
@@ -89,15 +135,14 @@ document.addEventListener("DOMContentLoaded", function() {
         return result;
     }
 
-    let doOperation = (e) => {
+    let doOperation = (op) => {
         const current = output.textContent;
         const operator = localStorage.getItem('operator');
         const value1 = localStorage.getItem('value1');
         const previous = localStorage.getItem('keystroke');
 
-        e.target.classList.add('selected');
         localStorage.setItem('keystroke', 'operation');
-        localStorage.setItem('operator', e.target.dataset.operation);
+        localStorage.setItem('operator', op);
 
         if (operator && value1 && previous !== 'operation' && previous !== 'equals') {
             localStorage.setItem('value2', current);
@@ -140,8 +185,6 @@ document.addEventListener("DOMContentLoaded", function() {
    }
 
     let setClearButton = (e) => {
-        if (!(e.target.id === 'clear')) {
-            document.getElementById('clear').innerHTML = 'CE';
-        }
+        document.getElementById('clear').innerHTML = 'CE';
     }
 })
