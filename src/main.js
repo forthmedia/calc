@@ -2,7 +2,7 @@ require('./styles.css');
 
 localStorage.clear();
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", () => {
     
     const output = document.getElementById('output');
 
@@ -179,9 +179,9 @@ document.addEventListener("DOMContentLoaded", function() {
         localStorage.clear();
         clearButton = document.getElementById('clear');
         clearButton.textContent = 'AC';
-   }
+    }
 
-    let setClearButton = (e) => {
+    let setClearButton = () => {
         document.getElementById('clear').innerHTML = 'CE';
     }
 })
