@@ -8,7 +8,7 @@ Version 1.1: Fix Calculator bugs. Update to Webpack. Webpack minifies JavaScript
 ## Run Development Server
 npm run dev
 
-## Clean and Build Distribution
+## Build Distribution
 npm run build
 
 ## Test Command
