@@ -1,4 +1,6 @@
-const path = require('path');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     entry: './src/main.js',
@@ -14,7 +16,11 @@ module.exports = {
         },
       ]
     },
-    devServer: {
-      contentBase: path.join(__dirname, 'src')
-    }  
+    plugins: [
+      new CleanWebpackPlugin(),
+      new HtmlWebpackPlugin({
+        template: './src/index.template.ejs',
+        inject: 'body',
+      })
+    ],
 };

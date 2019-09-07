@@ -176,12 +176,9 @@ document.addEventListener("DOMContentLoaded", function() {
     let doClear = () => {
         localStorage.setItem('keystroke', 'clear');
         output.textContent = '0';
+        localStorage.clear();
         clearButton = document.getElementById('clear');
-        if (clearButton.textContent == 'AC') {
-            localStorage.clear();
-        } else {
-            clearButton.textContent = 'AC';
-        }
+        clearButton.textContent = 'AC';
    }
 
     let setClearButton = (e) => {
